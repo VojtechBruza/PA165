@@ -1,12 +1,17 @@
 package cz.fi.muni.pa165;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 
+import cz.fi.muni.pa165.entity.Color;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import cz.fi.muni.pa165.entity.Category;
@@ -22,7 +27,7 @@ public class MainJavaSe {
 		emf = Persistence.createEntityManagerFactory("default");
 		try {
 			// BEGIN YOUR CODE
-			task05();
+			task06();
 			// END YOUR CODE
 		} finally {
 			emf.close();
@@ -31,7 +36,7 @@ public class MainJavaSe {
 	}
 
 	private static void task04() {
-		// TODO under this line, persist two categories, one with name
+		// under this line, persist two categories, one with name
 		// Electronics and second with name Musical
 		// You must first obtain the Entity manager
 		// Then you have to start transaction using getTransaction().begin()
@@ -75,13 +80,13 @@ public class MainJavaSe {
 		em.getTransaction().commit();
 		em.close();
 
-		// TODO under this line. create new EM and start new transaction. Merge
+		// under this line. create new EM and start new transaction. Merge
 		// the detached category
 		// into the context and change the name to "Electro"
 		EntityManager em1 = emf.createEntityManager();
 		em1.getTransaction().begin();
+		category = em1.merge(category); //to get managed entity
 		category.setName("Electro");
-		em1.merge(category);
 		em1.getTransaction().commit();
 		em1.close();
 
@@ -109,7 +114,18 @@ public class MainJavaSe {
 		// Additional task: Change the underlying table of Product entity to be ESHOP_PRODUCTS. After you do this, check this by inspecting console output (the CREATE TABLE statement)
 		//
 		// To test your code uncomment the commented code at the end of this method.
+		EntityManager em1 = emf.createEntityManager();
+		em1.getTransaction().begin();
+		Product g = new Product();
+		g.setName("Guitar");
+		g.setColor(Color.BLACK);
 
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+		Calendar calendar = new GregorianCalendar(2011,0,20);
+		g.setAddedDate(calendar.getTime());
+		em1.persist(g);
+		em1.getTransaction().commit();
+		em1.close();
 
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -118,8 +134,8 @@ public class MainJavaSe {
 		em.getTransaction().commit();
 		em.close();
 
-	/** TODO Uncomment the following test code after you are finished!
-	 
+//		TODO Uncomment the following test code after you are finished!
+
 		assertEq(p.getName(), "Guitar");
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(p.getAddedDate());
@@ -141,7 +157,7 @@ public class MainJavaSe {
 		System.out.println("Successfully persited Violin");
 		try {
 			em.persist(p2);
-			
+
 			throw new RuntimeException(
 					"Successfully saved new Product with the same name (Guitar) it should be unique!");
 		} catch (PersistenceException ex) {
@@ -149,10 +165,8 @@ public class MainJavaSe {
 					.println("Unsuccessfully saved second object with name Guitar -> OK");
 		}
 		em.close();
-	
 
 		System.out.println("Task6 ok!");
-		*/
 	}
 	
 	private static void task08() {

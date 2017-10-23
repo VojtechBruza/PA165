@@ -13,6 +13,9 @@ public class Car {
 
 	public Car(Color color, CarTypes type, int constructionYear, int price) {
 		super();
+		if (price < 0) {
+			throw new IllegalArgumentException("The buyer will have to pay to the seller!! Not the other way around ;)");
+		}
 		this.color = color;
 		this.type = type;
 		this.constructionYear = constructionYear;

@@ -33,7 +33,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void remove(Product p) {
-        em.remove(p);
+        em.remove(findById(p.getId()));
     }
 
     @Override

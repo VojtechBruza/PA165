@@ -33,7 +33,7 @@ public class MainXml {
     private static void springXmlContext() {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
         CurrencyConvertor currencyConvertor = applicationContext.getBean(CurrencyConvertor.class);
-        System.err.println("EUR to CZK test: "+currencyConvertor.convert(Currency.getInstance("EUR"),Currency.getInstance("CZK"),new BigDecimal(1)));
+        System.out.println("EUR to CZK test: "+currencyConvertor.convert(Currency.getInstance("EUR"),Currency.getInstance("CZK"),new BigDecimal(1)));
     }
 
     private static void springAnnotationContext() {

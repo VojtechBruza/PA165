@@ -35,11 +35,5 @@ public class MainXml {
         System.out.println("XML - EUR to CZK test: "+currencyConvertor.convert(Currency.getInstance("EUR"),Currency.getInstance("CZK"),new BigDecimal(1)));
     }
 
-    private static void springJavaConfigContext() {
-        System.err.println("Not supported yet");
-//        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringJavaConfig.class);
-//        CurrencyConvertor currencyConvertor = applicationContext.getBean("currencyConvertor", CurrencyConvertor.class);
-    }
-
 }
 

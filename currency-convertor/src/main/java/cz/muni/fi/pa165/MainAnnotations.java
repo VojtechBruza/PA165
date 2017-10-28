@@ -18,7 +18,7 @@ public class MainAnnotations {
 
     private static void springAnnotationContext() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext("cz.muni.fi.pa165");
-        CurrencyConvertor currencyConvertor = applicationContext.getBean(CurrencyConvertor.class);
+        CurrencyConvertor currencyConvertor = applicationContext.getBean("currencyConvertor",CurrencyConvertor.class);
         System.out.println("Annotations - EUR to CZK test: "+currencyConvertor.convert(Currency.getInstance("EUR"),Currency.getInstance("CZK"),new BigDecimal(1)));
     }
 }

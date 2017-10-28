@@ -21,7 +21,6 @@ public class MainXml {
 
         //noSpring();
         springXmlContext();
-        //springAnnotationContext();
 //        springJavaConfigContext();
     }
 
@@ -33,13 +32,7 @@ public class MainXml {
     private static void springXmlContext() {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
         CurrencyConvertor currencyConvertor = applicationContext.getBean(CurrencyConvertor.class);
-        System.out.println("EUR to CZK test: "+currencyConvertor.convert(Currency.getInstance("EUR"),Currency.getInstance("CZK"),new BigDecimal(1)));
-    }
-
-    private static void springAnnotationContext() {
-        System.err.println("Not supported yet");
-//        ApplicationContext applicationContext = new AnnotationConfigApplicationContext("cz.muni.fi.pa165");
-//        CurrencyConvertor currencyConvertor = applicationContext.getBean(CurrencyConvertor.class);
+        System.out.println("XML - EUR to CZK test: "+currencyConvertor.convert(Currency.getInstance("EUR"),Currency.getInstance("CZK"),new BigDecimal(1)));
     }
 
     private static void springJavaConfigContext() {

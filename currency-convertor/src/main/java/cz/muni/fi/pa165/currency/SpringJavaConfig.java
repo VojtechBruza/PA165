@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 @Configuration
 @ComponentScan("cz.muni.fi.pa165")
+@EnableAspectJAutoProxy
 public class SpringJavaConfig {
     @Inject
     private ExchangeRateTable exchangeRateTable;

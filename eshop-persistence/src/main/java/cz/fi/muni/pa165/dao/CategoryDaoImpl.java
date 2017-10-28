@@ -36,7 +36,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	@Override
 	public void delete(Category c) {
-		em.remove(c);
+		em.remove(findById(c.getId()));
 	}
 
 	@Override
